@@ -1,0 +1,64 @@
+<div class="container-fluid mt-2">
+  <button type="button" class="btn btn-secondary float-right my-2" (click)="openAddTodoModal()">Add Todo</button>
+  <div class="table-responsive-md mt-2">
+    <table class="table" id="summary_table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Todo</th>
+          <th scope="col">Description</th>
+          <th scope="col">Due Date</th>
+          <th scope="col">Tag(s)</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let todo of todoList; let i = index">
+          <th scope="row">{{todo.todo_id}}</th>
+          <td>{{todo.todo_name}} 
+            <span *ngIf="todo.todo_status=='Not Started'" class="badge badge-danger
+              text-uppercase">{{todo.todo_status}}
+            </span>
+            <span *ngIf="todo.todo_status=='In Progress'" class="badge badge-primary
+              text-uppercase">{{todo.todo_status}}
+            </span>
+            <span *ngIf="todo.todo_status=='Completed'" class="badge badge-success
+              text-uppercase">{{todo.todo_status}}
+            </span>
+          </td>
+          <td>{{todo.todo_description}}</td>
+          <td>{{todo.todo_due_date}}</td>
+          <td>
+            <span class="badge badge-secondary ml-1" *ngFor="let tag of todo.todo_tags; let j = index">
+              {{tag.tag_name}}
+            </span>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary mr-1" (click)="viewTodoModal(todo.todo_id)"><i class="bi bi-eye"></i></button>
+            <button type="button" class="btn btn-danger" (click)="openDeleteTodoModal(todo.todo_id)"><i class="bi bi-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteTodoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Delete TODO</h4>
+        <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You are going to delete the selected TODO from list. Are you sure?
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="deleteTodo()">Confirm</button>
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

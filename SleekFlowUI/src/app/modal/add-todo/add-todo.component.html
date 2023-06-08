@@ -1,0 +1,41 @@
+<div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Add TODO</h4>
+          <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #addTodoForm="ngForm" (ngSubmit)="onConfirm(addTodoForm)">
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="atodoInput" class="form-label">TODO</label>
+                    <input type="text" class="form-control" id="atodoInput" [(ngModel)]="atodo.todo_name" [ngModelOptions]="{standalone: true}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="atagsInput" class="form-label">Tag(s)</label>
+                    <span>
+                      <button type="button" class="btn btn-secondary" (click)="addTagModal()">Add Tag</button>
+                    </span>
+                    <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="atagList" [(ngModel)]="aselectedTags"
+                    [placeholder]="'Please select tag(s) for TODO'" name="atodo_tags"
+                    (onSelect)="OnSelect($event)" (onDeSelect)="OnDeSelect($event)"></ng-multiselect-dropdown>
+                </div>
+                <div class="mb-3">
+                    <label for="adescriptionInput" class="form-label" >Description</label>
+                    <textarea class="form-control" id="adescriptionInput" rows="3" [(ngModel)]="atodo.todo_description" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="adueDateInput" class="form-label" >Due Date</label>
+                    <input type="date" class="form-control" id="adueDateInput" [(ngModel)]="atodo.todo_due_date" [ngModelOptions]="{standalone: true}" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" >Save changes</button>
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>

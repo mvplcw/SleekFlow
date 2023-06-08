@@ -1,0 +1,41 @@
+<div class="modal fade" id="viewTodoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">View TODO</h4>
+          <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="vtodoInput" class="form-label">TODO</label>
+                <input type="text" class="form-control" id="vtodoInput" [(ngModel)]="vTodo.todo_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="vtagsInput" class="form-label">Tag(s)</label>
+                <span>
+                  <button type="button" class="btn btn-secondary" (click)="addTagModal()">Add Tag</button>
+                </span>
+                <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="vtagList" [(ngModel)]="vselectedTags"
+                [placeholder]="'No tag'" name="vtodo_tags"
+                ></ng-multiselect-dropdown>
+            </div>
+            <div class="mb-3">
+                <label for="vdescriptionInput" class="form-label" >Description</label>
+                <textarea class="form-control" id="vdescriptionInput" rows="3" [(ngModel)]="vTodo.todo_description"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="vdueDateInput" class="form-label" >Due Date</label>
+                <input type="date" class="form-control" value="vTodo.todo_due_date" [(ngModel)]="vTodo.todo_due_date" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" *ngIf="vTodo.todo_status=='Not Started'" class="btn btn-primary" (click)="changeStatus('In Progress')">Mark as In Progress</button>
+            <button type="button" *ngIf="vTodo.todo_status=='In Progress'" class="btn btn-success" (click)="changeStatus('Completed')">Mark as Completed</button>
+            <button type="button" class="btn btn-danger" (click)="saveChanges()">Save Changes</button>
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+</div>

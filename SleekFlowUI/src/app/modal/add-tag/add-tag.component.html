@@ -1,0 +1,24 @@
+<div class="modal fade" id="addTagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Add Tag</h4>
+        <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #addTagForm="ngForm" (ngSubmit)="onConfirm(addTagForm)">
+          <div class="modal-body">
+              <div class="mb-3">
+                  <label for="tagInput" class="form-label">Tag</label>
+                  <input type="text" class="form-control" id="tagInput" [(ngModel)]="tag_name" [ngModelOptions]="{standalone: true}" required>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" >Add</button>
+              <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
